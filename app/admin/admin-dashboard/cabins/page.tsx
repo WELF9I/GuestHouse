@@ -61,14 +61,10 @@ export default function CabinsPage() {
       const response = await axios.post('http://localhost:8000/api/guesthouses/', cabin);
       const guesthouseId = response.data.id;
 
-      await Promise.all(
-        images.map((image) =>
-          axios.post('http://localhost:8000/api/images/', {
-            guesthouse: guesthouseId,
-            images: image,
-          })
-        )
-      );
+      await axios.post('http://localhost:8000/api/images/', {
+        guesthouse: guesthouseId,
+        images: images  
+      });
 
       setCabin({
         name: '',

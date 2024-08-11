@@ -55,7 +55,7 @@ class ImageViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         guesthouse_id = request.data.get('guesthouse')
-        images_data = request.data.getlist('images')  # Use getlist to handle multiple files
+        images_data = request.data.get('images')  # This will be a single string or a list
 
         if not guesthouse_id:
             return Response({'error': 'Guesthouse ID not provided.'}, status=status.HTTP_400_BAD_REQUEST)
@@ -66,9 +66,24 @@ class ImageViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Guesthouse not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         created_images = []
-        for image_data in images_data:
-            image = Image.objects.create(guesthouse=guesthouse, image_blob=image_data.read())
-            created_images.append(image)
+        
+        # Handle single image or multiple images
+        if isinstance(images_data, list):
+            image_list = images_data
+        else:
+            image_list = [images_data]
+
+        for image_data in image_list:
+            # Remove the 'data:image/jpeg;base64,' part if present
+            if image_data.startswith('data:image'):
+                image_data = image_data.split('base64,')[1]
+
+            try:
+                image_blob = base64.b64decode(image_data)
+                image = Image.objects.create(guesthouse=guesthouse, image_blob=image_blob)
+                created_images.append(image)
+            except Exception as e:
+                return Response({'error': f'Error processing image: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = self.get_serializer(created_images, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
