@@ -1,7 +1,7 @@
 # Guesthouse Management System
 
-![Guesthouse Management System](https://via.placeholder.com![Uploading Project7.png…]()
-/800x300.png?text=Guesthouse+Management+System)
+![image](![Project7](https://github.com/user-attachments/assets/5f529944-a928-4744-b778-7d03f7a911c7)
+)
 
 This project is a web-based Guesthouse Management System designed to streamline the process of managing guesthouses. It includes functionalities such as user authentication, admin authentication,  guest house booking system etc.
 
