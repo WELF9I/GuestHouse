@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { FaUser, FaLock } from 'react-icons/fa';
+import { API_URL } from '@/constants/config';
 
 export default function AdminSignIn() {
   const [username, setUsername] = useState('');
@@ -16,7 +17,7 @@ export default function AdminSignIn() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8000/api/token/', {
+      const response = await axios.post(`${API_URL}/api/token/`, {
         username,
         password,
       });
@@ -27,7 +28,7 @@ export default function AdminSignIn() {
 
       // Check if the user is an admin
       try {
-        const userResponse = await axios.get('http://localhost:8000/api/users/', {
+        const userResponse = await axios.get(`${API_URL}/api/users/`, {
           headers: { Authorization: `Bearer ${access}` }
         });
 

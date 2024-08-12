@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
-
+import { API_URL } from '@/constants/config';
 
 type CabinDetailsProps = {
   cabinId: string;
@@ -104,7 +104,7 @@ type FormData = {
     const phoneToInsert = formData.phoneNumber !== clerkPhone && formData.phoneNumber !== '' ? formData.phoneNumber : clerkPhone;
 
     try {
-        const response = await axios.post('http://localhost:8000/api/create-or-get-user/', {
+        const response = await axios.post('${API_URL}/api/create-or-get-user/', {
             clerk_id: user.id,
             name: nameToInsert,
             email: emailToInsert,
@@ -135,7 +135,7 @@ type FormData = {
 
   const fetchCabinData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/guesthouses/${cabinId}/`);
+      const response = await axios.get(`${API_URL}/api/guesthouses/${cabinId}/`);
       setCabin(response.data);
     } catch (error) {
       console.error('Error fetching cabin data:', error);
@@ -144,7 +144,7 @@ type FormData = {
 
   const fetchCabinImages = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/images/?guesthouse=${cabinId}`);
+      const response = await axios.get(`${API_URL}/api/images/?guesthouse=${cabinId}`);
       setCabinImages(response.data);
     } catch (error) {
       console.error('Error fetching cabin images:', error);
@@ -211,7 +211,7 @@ type FormData = {
     }
     try {
       await createOrGetUser();
-      const bookingResponse = await axios.post('http://localhost:8000/api/bookings/', {
+      const bookingResponse = await axios.post(`${API_URL}/api/bookings/`, {
         guesthouse: cabin?.id,
         clerk_id: user.id,
         start_date: formData.checkinDate,
@@ -239,7 +239,7 @@ type FormData = {
 
   const confirmPayment = async () => {
     try {
-      await axios.post('http://localhost:8000/api/payments/', {
+      await axios.post(`${API_URL}/api/payments/`, {
         booking: bookingId,
         amount: calculateTotalCost(),
         status: "Completed"

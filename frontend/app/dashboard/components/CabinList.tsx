@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaBed } from 'react-icons/fa';
 import axios from 'axios';
-
+import { API_URL } from '@/constants/config';
 interface Cabin {
   id: number;
   name: string;
@@ -29,7 +29,7 @@ const CabinList = () => {
 
   const fetchCabins = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/guesthouses/');
+      const response = await axios.get(`${API_URL}/api/guesthouses/`);
       setCabins(response.data);
       fetchCabinImages(response.data);
     } catch (error) {
@@ -40,7 +40,7 @@ const CabinList = () => {
   const fetchCabinImages = async (cabins: Cabin[]) => {
     const imagePromises = cabins.map(async (cabin) => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/images/?guesthouse=${cabin.id}`);
+        const response = await axios.get(`${API_URL}/api/images/?guesthouse=${cabin.id}`);
         if (response.data.length > 0) {
           return { id: cabin.id, image: `data:image/jpeg;base64,${response.data[0].image_base64}` };
         }

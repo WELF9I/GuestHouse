@@ -5,7 +5,7 @@ import axios from 'axios';
 import { FaImages, FaTrash, FaCheck, FaTimesCircle } from 'react-icons/fa';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import toast, { Toaster } from 'react-hot-toast';
-
+import { API_URL } from '@/constants/config';
 interface Cabin {
   id: number;
   name: string;
@@ -53,10 +53,10 @@ export default function EditCabinPage({ isOpen, onClose, cabinId, onUpdate }: Ed
 
   const fetchCabinData = async () => {
     try {
-      const cabinResponse = await axios.get(`http://localhost:8000/api/guesthouses/${cabinId}/`);
+      const cabinResponse = await axios.get(`${API_URL}/api/guesthouses/${cabinId}/`);
       setCabin(cabinResponse.data);
       
-      const imagesResponse = await axios.get(`http://localhost:8000/api/images/?guesthouse=${cabinId}`);
+      const imagesResponse = await axios.get(`${API_URL}/api/images/?guesthouse=${cabinId}`);
       setImages(imagesResponse.data);
       setImagePreview(imagesResponse.data.map((img: Image) => `data:image/jpeg;base64,${img.image_base64}`));
     } catch (err) {
@@ -80,7 +80,7 @@ export default function EditCabinPage({ isOpen, onClose, cabinId, onUpdate }: Ed
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/api/guesthouses/${cabinId}/`, cabin);
+      await axios.put(`${API_URL}/api/guesthouses/${cabinId}/`, cabin);
 
       if (newImages.length > 0) {
         const formData = new FormData();
@@ -89,7 +89,7 @@ export default function EditCabinPage({ isOpen, onClose, cabinId, onUpdate }: Ed
           formData.append('images', file);
         });
 
-        await axios.post('http://localhost:8000/api/images/', formData, {
+        await axios.post(`${API_URL}/api/images/`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -111,7 +111,7 @@ export default function EditCabinPage({ isOpen, onClose, cabinId, onUpdate }: Ed
     try {
       if (index < images.length) {
         // Existing image
-        await axios.delete(`http://localhost:8000/api/images/${images[index].id}/`);
+        await axios.delete(`${API_URL}/api/images/${images[index].id}/`);
         setImages(images.filter((_, i) => i !== index));
       } else {
         // New image

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-
+import { API_URL } from '@/constants/config';
 interface DeleteProps {
   id: number;
   type: 'booking' | 'guesthouse' | 'customusers';
@@ -14,7 +14,7 @@ const DeleteItem: React.FC<DeleteProps> = ({ id, type, fetchData }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/${type}s/${id}/`);
+      await axios.delete(`${API_URL}/api/${type}s/${id}/`);
       fetchData();
       setIsOpen(false);
     } catch (error) {

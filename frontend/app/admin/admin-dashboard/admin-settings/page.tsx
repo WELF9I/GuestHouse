@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FaUser, FaLock } from 'react-icons/fa';
 import MenuBar from '../components/MenuBar';
-
+import { API_URL } from '@/constants/config';
 export default function AdminSettings() {
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -19,7 +19,7 @@ export default function AdminSettings() {
 
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await axios.post('http://localhost:8000/api/update-admin/', 
+      const response = await axios.post(`${API_URL}/api/update-admin/`, 
         { username: newUsername },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
@@ -52,7 +52,7 @@ export default function AdminSettings() {
   
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await axios.post('http://localhost:8000/api/update-admin/', 
+      const response = await axios.post(`${API_URL}/api/update-admin/`, 
         { password: newPassword },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );

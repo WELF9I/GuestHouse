@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import MenuBar from '../components/MenuBar';
 import { useRouter } from 'next/navigation';
 import { toast, Toaster } from 'react-hot-toast';
-
+import { API_URL } from '@/constants/config';
 interface Cabin {
   name: string;
   description: string;
@@ -58,10 +58,10 @@ export default function CabinsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/guesthouses/', cabin);
+      const response = await axios.post(`${API_URL}/api/guesthouses/`, cabin);
       const guesthouseId = response.data.id;
 
-      await axios.post('http://localhost:8000/api/images/', {
+      await axios.post(`${API_URL}/api/images/`, {
         guesthouse: guesthouseId,
         images: images  
       });
