@@ -1,6 +1,6 @@
 import { BathIcon, BedDouble, BedIcon } from 'lucide-react';
 import React from 'react';
-
+import Image from 'next/image';
 const InfoIcons=[
     {
         icon:<BedIcon className='text-black'/>,
@@ -23,7 +23,7 @@ const SleepingArrangements = () => {
   return (
     <div className="bg-gray-50 flex flex-col items-center">
       <div className="w-full max-w-8xl mx-auto shadow-lg">
-        <img
+        <Image
           src="/kitchen_cabin.jpg"
           alt="Kitchen"
           className="w-full h-auto"
@@ -33,8 +33,9 @@ const SleepingArrangements = () => {
             Sleeping arrangements.
           </h2>
           <p className="text-gray-700 text-base md:text-lg leading-relaxed text-center mt-4">
-          Our guest house offers a variety of comfortable sleeping arrangements to suit your needs. With cozy beds, soft linens, and a peaceful environment, you are guaranteed a restful night's sleep.
+            Our guest house offers a variety of comfortable sleeping arrangements to suit your needs. With cozy beds, soft linens, and a peaceful environment, you are guaranteed a restful night&apos;s sleep.
           </p>
+
           <div className="flex flex-col md:flex-row justify-between items-center mt-8">
                 
                     {InfoIcons.map((item)=>{

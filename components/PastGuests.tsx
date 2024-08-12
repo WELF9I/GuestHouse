@@ -6,7 +6,7 @@ const PastGuests = () => {
     {
         rating: 5,
         title: "We had an amazing stay at Villa Acapella!",
-        content: "Our stay at Villa Acapella was absolutely fantastic. The guesthouse was beautifully decorated and provided a warm and welcoming atmosphere. The amenities were top-notch, and the staff was incredibly friendly and attentive. The location offered stunning views and easy access to local attractions. We couldn't have asked for a better experience!",
+        content: "Our stay at Villa Acapella was absolutely fantastic. The guesthouse was beautifully decorated and provided a warm and welcoming atmosphere. The amenities were top-notch, and the staff was incredibly friendly and attentive. The location offered stunning views and easy access to local attractions. We couldn&apos;t have asked for a better experience!",
         author: "Mohamed Ali"
     },
     {
@@ -27,7 +27,7 @@ const PastGuests = () => {
     <div className="container mx-auto px-4 py-16">
       <h2 className="text-3xl font-bold text-center mb-2">Past guests.</h2>
       <p className="text-center text-gray-600 mb-8">
-        Don't take our word for it! Have a look at what our previous guests say about their stay at VillaAcapella.
+        Don&apos;t take our word for it! Have a look at what our previous guests say about their stay at Villa Acapella.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {reviews.map((review, index) => (

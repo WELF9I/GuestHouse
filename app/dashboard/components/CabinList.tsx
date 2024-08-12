@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaBed } from 'react-icons/fa';
@@ -27,11 +27,7 @@ const CabinList = () => {
   const [cabins, setCabins] = useState<Cabin[]>([]);
   const [cabinImages, setCabinImages] = useState<{ [key: number]: string }>({});
 
-  useEffect(() => {
-    fetchCabins();
-  }, []);
-
-  const fetchCabins = async () => {
+  const fetchCabins = useCallback(async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/guesthouses/');
       setCabins(response.data);
@@ -39,7 +35,7 @@ const CabinList = () => {
     } catch (error) {
       console.error('Error fetching cabins:', error);
     }
-  };
+  }, []);
 
   const fetchCabinImages = async (cabins: Cabin[]) => {
     const imagePromises = cabins.map(async (cabin) => {
@@ -64,6 +60,10 @@ const CabinList = () => {
 
     setCabinImages(imageMap);
   };
+
+  useEffect(() => {
+    fetchCabins();
+  }, [fetchCabins]); // Added fetchCabins to the dependency array
 
   const handleFilterChange = (filter: string) => {
     setSelectedFilter(filter);
