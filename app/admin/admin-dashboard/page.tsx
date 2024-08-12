@@ -345,13 +345,6 @@ export default function AdminDashboard() {
       {isEditPopupOpen && selectedCabinId && (
       <EditCabinPage
         params={{ id: selectedCabinId.toString() }}
-        isOpen={isEditPopupOpen}
-        onClose={() => {
-          setIsEditPopupOpen(false);
-          setSelectedCabinId(null);
-        }}
-        cabinId={selectedCabinId}
-        onUpdate={refreshCabinData}
       />
     )}
 
@@ -359,13 +352,6 @@ export default function AdminDashboard() {
       {isEditBookingOpen && editBookingId && (
       <EditBookingPage
         params={{ id: editBookingId.toString() }}
-        isOpen={isEditBookingOpen}
-        onClose={() => {
-          setIsEditBookingOpen(false);
-          setEditBookingId(null);
-        }}
-        bookingId={editBookingId}
-        onUpdate={fetchData}
       />
       )}
       </div>

@@ -1,16 +1,16 @@
-import EditBookingClient from './EditBookingClient'
+import EditBookingClient from './EditBookingClient';
 
-interface PageProps {
-  params: {
-    id: string
-  }
-  isOpen: boolean
-  onClose: () => void
-  bookingId: number
-  onUpdate: () => void
+interface PageParams {
+  id: string;
 }
 
-export default function EditBookingPage({ params, isOpen, onClose, bookingId, onUpdate }: PageProps) {
+export default function EditBookingPage({ params }: { params: PageParams }) {
+
+  const isOpen = true; 
+  const onClose = () => {};
+  const bookingId = parseInt(params.id);
+  const onUpdate = async () => {};
+
   return (
     <EditBookingClient 
       isOpen={isOpen} 
@@ -18,5 +18,5 @@ export default function EditBookingPage({ params, isOpen, onClose, bookingId, on
       bookingId={bookingId} 
       onUpdate={onUpdate}
     />
-  )
+  );
 }

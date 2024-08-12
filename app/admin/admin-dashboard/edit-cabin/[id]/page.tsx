@@ -1,16 +1,16 @@
 import EditCabinClient from './EditCabinClient'
 
-interface PageProps {
-  params: {
-    id: string
-  }
-  isOpen: boolean
-  onClose: () => void
-  cabinId: number
-  onUpdate: () => void
+interface PageParams {
+  id: string;
 }
 
-export default function EditCabinPage({ params, isOpen, onClose, cabinId, onUpdate }: PageProps) {
+
+export default function EditCabinPage({ params }: { params: PageParams }) {
+  const isOpen = true;
+  const onClose = () => {}; 
+  const cabinId = parseInt(params.id);
+  const onUpdate = async () => {}; 
+
   return (
     <EditCabinClient 
       isOpen={isOpen} 
