@@ -8,7 +8,7 @@ import MenuBar from './components/MenuBar';
 import DeleteItem from './components/DeleteItem';
 import { Button } from '@/components/ui/button';
 import EditCabinPage from './edit-cabin/[id]/page';
-import EditBooking from './edit-booking/[id]/page';
+import EditBookingPage from './edit-booking/[id]/page';
 interface Booking {
   id: number;
   guesthouse: number;
@@ -343,27 +343,31 @@ export default function AdminDashboard() {
         </div>
       </div>
       {isEditPopupOpen && selectedCabinId && (
-                   <EditCabinPage
-                     isOpen={isEditPopupOpen}
-                     onClose={() => {
-                       setIsEditPopupOpen(false);
-                       setSelectedCabinId(null);
-                     }}
-                     cabinId={selectedCabinId}
-                     onUpdate={refreshCabinData}
-      />)}
+      <EditCabinPage
+        params={{ id: selectedCabinId.toString() }}
+        isOpen={isEditPopupOpen}
+        onClose={() => {
+          setIsEditPopupOpen(false);
+          setSelectedCabinId(null);
+        }}
+        cabinId={selectedCabinId}
+        onUpdate={refreshCabinData}
+      />
+    )}
 
       {/* EditBooking component */}
-          {isEditBookingOpen && editBookingId && (
-            <EditBooking
-              isOpen={isEditBookingOpen}
-              onClose={() => {
-                setIsEditBookingOpen(false);
-                setEditBookingId(null);
-              }}
-              bookingId={editBookingId}
-              onUpdate={fetchData}
-            />)}
+      {isEditBookingOpen && editBookingId && (
+      <EditBookingPage
+        params={{ id: editBookingId.toString() }}
+        isOpen={isEditBookingOpen}
+        onClose={() => {
+          setIsEditBookingOpen(false);
+          setEditBookingId(null);
+        }}
+        bookingId={editBookingId}
+        onUpdate={fetchData}
+      />
+      )}
       </div>
   );
 }

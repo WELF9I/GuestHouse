@@ -4,15 +4,19 @@ interface PageProps {
   params: {
     id: string
   }
+  isOpen: boolean
+  onClose: () => void
+  bookingId: number
+  onUpdate: () => void
 }
 
-export default function EditBookingPage({ params }: PageProps) {
+export default function EditBookingPage({ params, isOpen, onClose, bookingId, onUpdate }: PageProps) {
   return (
     <EditBookingClient 
-      isOpen={true} 
-      onClose={() => {}} 
-      bookingId={parseInt(params.id)} 
-      onUpdate={() => {}}
+      isOpen={isOpen} 
+      onClose={onClose} 
+      bookingId={bookingId} 
+      onUpdate={onUpdate}
     />
   )
 }

@@ -4,15 +4,19 @@ interface PageProps {
   params: {
     id: string
   }
+  isOpen: boolean
+  onClose: () => void
+  cabinId: number
+  onUpdate: () => void
 }
 
-export default function EditCabinPage({ params }: PageProps) {
+export default function EditCabinPage({ params, isOpen, onClose, cabinId, onUpdate }: PageProps) {
   return (
     <EditCabinClient 
-      isOpen={true} 
-      onClose={() => {}} 
-      cabinId={parseInt(params.id)} 
-      onUpdate={() => {}}
+      isOpen={isOpen} 
+      onClose={onClose} 
+      cabinId={cabinId} 
+      onUpdate={onUpdate}
     />
   )
 }
