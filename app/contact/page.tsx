@@ -34,7 +34,7 @@ const formSchema = z.object({
   }),
 })
 
-export const Contact = () => {
+const Contact = () => {
   const [submittedData, setSubmittedData] = useState(null);
   const [mailtoLink, setMailtoLink] = useState("");
 
