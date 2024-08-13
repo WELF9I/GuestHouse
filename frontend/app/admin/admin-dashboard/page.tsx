@@ -87,19 +87,12 @@ export default function AdminDashboard() {
   }, []);
 
   const fetchData = async () => {
-    const adminSession = localStorage.getItem('adminSession');
-  try {
-    const [bookingsRes, guestHousesRes, usersRes] = await Promise.all([
-      axios.get(`${API_URL}/api/bookings/`, {
-        headers: { Authorization: `Bearer ${adminSession}` }
-      }),
-      axios.get(`${API_URL}/api/guesthouses/`, {
-        headers: { Authorization: `Bearer ${adminSession}` }
-      }),
-      axios.get(`${API_URL}/api/customusers/`, {
-        headers: { Authorization: `Bearer ${adminSession}` }
-      }),
-    ]);
+    try {
+      const [bookingsRes, guestHousesRes, usersRes] = await Promise.all([
+        axios.get(`${API_URL}/api/bookings/`),
+        axios.get(`${API_URL}/api/guesthouses/`),
+        axios.get(`${API_URL}/api/customusers/`),
+      ]);
 
       setBookings(bookingsRes.data);
       setGuestHouses(guestHousesRes.data);
