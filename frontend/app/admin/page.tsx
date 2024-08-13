@@ -66,10 +66,11 @@ export default function AdminSignIn() {
             <div className="relative">
               <FaUser className="absolute top-3 left-3 text-gray-400" />
               <input
+                autoComplete="on"
                 id="username"
                 name="username"
                 type="text"
-                required
+                required           
                 className="appearance-none rounded-none relative block w-full px-3 py-2 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
                 value={username}
@@ -79,6 +80,7 @@ export default function AdminSignIn() {
             <div className="relative">
               <FaLock className="absolute top-3 left-3 text-gray-400" />
               <input
+                autoComplete="on"
                 id="password"
                 name="password"
                 type="password"
