@@ -9,6 +9,7 @@ import DeleteItem from './components/DeleteItem';
 import { Button } from '@/components/ui/button';
 import EditCabinPage from './edit-cabin/[id]/page';
 import EditBookingPage from './edit-booking/[id]/page';
+import { API_URL } from '@/constants/config';
 interface Booking {
   id: number;
   guesthouse: number;
@@ -88,9 +89,9 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     try {
       const [bookingsRes, guestHousesRes, usersRes] = await Promise.all([
-        axios.get('http://localhost:8000/api/bookings/'),
-        axios.get('http://localhost:8000/api/guesthouses/'),
-        axios.get('http://localhost:8000/api/customusers/'),
+        axios.get(`${API_URL}/api/bookings/`),
+        axios.get(`${API_URL}/api/guesthouses/`),
+        axios.get(`${API_URL}/api/customusers/`),
       ]);
 
       setBookings(bookingsRes.data);
@@ -156,7 +157,7 @@ export default function AdminDashboard() {
 
   const handleDelete = async (id: number, type: 'booking' | 'guesthouse') => {
     try {
-      await axios.delete(`http://localhost:8000/api/${type}s/${id}/`);
+      await axios.delete(`${API_URL}/api/${type}s/${id}/`);
       fetchData();
     } catch (error) {
       console.error(`Error deleting ${type}:`, error);
@@ -169,7 +170,7 @@ export default function AdminDashboard() {
 
   const refreshCabinData = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/guesthouses/');
+      const response = await axios.get(`${API_URL}/api/guesthouses/`);
       setGuestHouses(response.data);
     } catch (error) {
       console.error('Error refreshing cabin data:', error);
