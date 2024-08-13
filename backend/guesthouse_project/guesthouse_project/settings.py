@@ -150,7 +150,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True  # For development only. In production, specify the allowed origins.
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    'https://guest-house-fawn.vercel.app',
+    "https://guest-house-fawn.vercel.app",
+    "http://localhost:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
